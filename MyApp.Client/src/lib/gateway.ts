@@ -1,5 +1,5 @@
 import { JsonServiceClient } from "@servicestack/client"
-import { useMetadata } from "@servicestack/vue"
+import { useAuth, initMetadata } from "@servicestack/vue"
 import type { Router } from "vue-router"
 import { checkAuth } from "./auth"
 
@@ -30,16 +30,17 @@ export const Routes = {
     forbidden: () => '/forbidden',
     guards: [
         Requires.auth('/profile'),
-    ] as RouteGuard[],
+    ],
 }
 
 export const client = new JsonServiceClient()
 
 export function useApp() {
     async function load() {
-        const { loadMetadata } = useMetadata()
-        loadMetadata({ client, olderThan:0 })
-        await checkAuth()
+        const { signIn } = useAuth()
+        initMetadata({ client })
+        const auth = await checkAuth()
+        if (auth) signIn(auth)
     }
     return {
         load,

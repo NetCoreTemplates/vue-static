@@ -31,11 +31,6 @@ const { user, hasRole, hasPermission, signIn, signOut } = useAuth()
 
 export { user, hasRole, hasPermission }
 
-checkAuth().then(auth => {
-    if (auth) signIn(auth)
-    else signOut()
-})
-
 export async function revalidate() {
     loading.value = true
     const auth = await checkAuth()
@@ -55,7 +50,6 @@ export const signout = async (router:any, redirectTo?: string) => {
     await router.replace({ path: redirectTo ?? router?.currentRoute?.value.path, force: true })
 }
 
-// Use Route Guards to guard against access to pages 
 export function configRouter(router:Router)  {
     const invalidAttrRedirect = (to:RouteLocationNormalized, _:string, userAttrs:string[]) => userAttrs.indexOf('auth') === -1
         ? Routes.signin(to.path)
@@ -73,7 +67,7 @@ export function configRouter(router:Router)  {
                 const allowAdmin = isAdmin && (attr.startsWith('role:') || attr.startsWith('perm:'))
                 if (!allowAdmin) {
                     const goTo = invalidAttrRedirect(to, attr, attrs)
-                    console.log(`Redirecting to ${goTo} as missing required '${attr}' to access '${to.path}'`)
+                    console.debug(`Redirecting to ${goTo} as missing required '${attr}' to access '${to.path}'`)
                     next(goTo)
                     return
                 }
