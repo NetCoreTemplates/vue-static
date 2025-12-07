@@ -18,7 +18,7 @@ Instantly [scaffold a new App with this template](https://github.com/new?templat
 
 ## Getting Started
 
-Run Server .NET Project (automatically starts both .NET and Vite React dev servers):
+Run Server .NET Project (automatically starts both .NET and Vite Vue dev servers):
 
 ```bash
 cd MyProject
@@ -41,7 +41,7 @@ dotnet watch
 
 ![](https://raw.githubusercontent.com/ServiceStack/docs.servicestack.net/refs/heads/main/MyApp/wwwroot/img/pages/templates/info/vite-prod.svg)
 
-- Vite React app is statically exported to `/dist`
+- Vite Vue app is statically exported to `/dist`
 - Static files served directly from ASP.NET Core's `/wwwroot`
 - No separate Node.js server required in production
 
@@ -385,6 +385,6 @@ npx okai rm Transaction.d.ts
 - [ServiceStack Documentation](https://docs.servicestack.net)
 - [Vite Documentation](https://vite.dev)
 - [Vue Documentation](https://vuejs.org)
-- [AutoQuery CRUD](https://react-templates.net/docs/autoquery/crud)
+- [AutoQuery CRUD](hhttps://docs.servicestack.net/autoquery/crud)
 - [Background Jobs](https://docs.servicestack.net/kamal-deploy)
 - [AI Chat API](https://docs.servicestack.net/ai-chat-api)
