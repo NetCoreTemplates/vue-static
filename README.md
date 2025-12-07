@@ -347,22 +347,9 @@ and OSS models to generate the TypeScript Data Models required to implement this
 You'll be able to browse and choose which of the AI Models you prefer which you can accept by pressing `a` 
 to `(a) accept`. These are the data models [Claude Sonnet 4.5 generated](https://servicestack.net/text-to-blazor?id=1764337230546) generated for this prompt.
 
-If your happy to use the data-models as-is you can run the DB Migrations to create these RDBMS tables:
-
-```bash
-npm run migrate
-```
-
-Otherwise you can make whatever customizations you want to the `Table.d.ts` data models then re-run the `okai` tool to re-generate the AutoQuery APIs and DB Migrations before running the migration.
-
-```bash
-npx okai Table.d.ts
-npm run migrate
-```
-
 #### Regenerate AutoQuery APIs and DB Migrations
 
-After modifying the TypeScript Data Model to include the desired fields, re-run the `okai` tool to re-generate the AutoQuery APIs and DB Migrations:
+After modifying the `Table.d.ts` TypeScript Data Model to include the desired fields, re-run the `okai` tool to re-generate the AutoQuery APIs and DB Migrations:
 
 ```bash
 npx okai Table.d.ts
