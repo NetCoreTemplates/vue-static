@@ -324,6 +324,8 @@ For Rapid Development simple [TypeScript Data Models](https://docs.servicestack.
 
 ### Cheat Sheet
 
+### Create a new Table
+
 Create a new Table use `init <Table>`, e.g:
 
 ```bash
@@ -331,6 +333,32 @@ npx okai init Table
 ```
 
 This will generate an empty `MyApp.ServiceModel/<Table>.d.ts` file along with stub AutoQuery APIs and DB Migration implementations. 
+
+### Use AI to generate the TypeScript Data Model
+
+Or to get you started quickly you can also use AI to generate the initial TypeScript Data Model with:
+
+```bash
+npx okai "Table to store Customer Stripe Subscriptions"
+```
+
+This launches a TUI that invokes ServiceStack's okai API to fire multiple concurrent requests to frontier cloud 
+and OSS models to generate the TypeScript Data Models required to implement this feature. 
+You'll be able to browse and choose which of the AI Models you prefer which you can accept by pressing `a` 
+to `(a) accept`. These are the data models [Claude Sonnet 4.5 generated](https://servicestack.net/text-to-blazor?id=1764337230546) generated for this prompt.
+
+If your happy to use the data-models as-is you can run the DB Migrations to create these RDBMS tables:
+
+```bash
+npm run migrate
+```
+
+Otherwise you can make whatever customizations you want to the `Table.d.ts` data models then re-run the `okai` tool to re-generate the AutoQuery APIs and DB Migrations before running the migration.
+
+```bash
+npx okai Table.d.ts
+npm run migrate
+```
 
 #### Regenerate AutoQuery APIs and DB Migrations
 
@@ -385,6 +413,6 @@ npx okai rm Transaction.d.ts
 - [ServiceStack Documentation](https://docs.servicestack.net)
 - [Vite Documentation](https://vite.dev)
 - [Vue Documentation](https://vuejs.org)
-- [AutoQuery CRUD](hhttps://docs.servicestack.net/autoquery/crud)
+- [AutoQuery CRUD](https://docs.servicestack.net/autoquery/crud)
 - [Background Jobs](https://docs.servicestack.net/kamal-deploy)
 - [AI Chat API](https://docs.servicestack.net/ai-chat-api)
