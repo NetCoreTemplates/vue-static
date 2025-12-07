@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath } from 'url'
 
@@ -21,5 +21,9 @@ export default defineConfig({
   server: {
     host: true, // Listen on all interfaces (both IPv4 and IPv6)
     open: false,
+  },
+  test: {
+    environment: 'happy-dom',
+    globals: true,
   }
 })

@@ -6,7 +6,6 @@ import '../styles/style.css'
 import App from '@/App.vue'
 import Index from '@/index.vue'
 import Profile from '@/profile.vue'
-import Test from '@/test.vue'
 import { isServerRoute, useApp } from '@/lib/gateway'
 import { configRouter } from '@/lib/auth'
 
@@ -21,7 +20,6 @@ if (colorScheme === 'dark') {
 export const router = configRouter(createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/test', component: Test },
         { path: '/profile', component: Profile },
         { path: '/:pathMatch(.*)*', component: Index }
     ],
