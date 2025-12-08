@@ -77,7 +77,7 @@ npx okai rm Table.d.ts
 ### Hybrid Development/Production Model
 
 **Development Mode:**
-- `dotnet watch` from MyApp starts .NET (port 5001) and Vite dev server (port 5173), accesible via `https://localhost:5001`
+- `dotnet watch` from MyApp starts .NET (port 5001) and Vite dev server (port 5173), accessible via `https://localhost:5001`
 - ASP.NET Core proxies requests to Vite dev server via `NodeProxy` (configured in [Program.cs](MyApp/Program.cs#L41))
 - Hot Module Replacement (HMR) enabled via WebSocket proxying using `MapNotFoundToNode`, `MapViteHmr`, `RunNodeProcess`, `MapFallbackToNode` in [Program.cs](MyApp/Program.cs)
 
@@ -368,7 +368,7 @@ AutoQuery also matches on pluralized fields where `Ids` matches `Id` and applies
 const api = client.api(new QueryBookings({ ids:[1,2,3] }))
 ```
 
-Multiple Request DTO properties applies mutliple **AND** filters, e.g:
+Multiple Request DTO properties applies multiple **AND** filters, e.g:
 
 ```typescript
 const api = client.api(new QueryBookings({ minCost:100, ids:[1,2,3] }))
@@ -442,7 +442,7 @@ The `api` and `apiVoid` APIs return an `ApiResult<Response>` which holds both su
 ```typescript
 const api = await client.api(new Hello({ name }))
 if (api.succeeded) {
-    console.log(`The API succeded:`, api.response)
+    console.log(`The API succeeded:`, api.response)
 } else if (api.error) {
     console.log(`The API failed:`, api.error)
 }
@@ -455,7 +455,7 @@ const submit = async (e:HTMLFormElement) => {
     const form = e.currentTarget as HTMLFormElement
     const api = await client.apiForm(new CreateContact(), new FormData(form))
     if (api.succeeded) {
-        console.log(`The API succeded:`, api.response)
+        console.log(`The API succeeded:`, api.response)
     } else if (api.error) {
         console.log(`The API failed:`, api.error)
     }
@@ -570,7 +570,7 @@ Configured in [Configure.BackgroundJobs.cs](MyApp/Configure.BackgroundJobs.cs) u
    - `npx okai Feature.d.ts`
    - `npm run migrate`
 
-Docs: [AutoQuery Dev Worfklow](https://react-templates.net/docs/autoquery/dev-workflow)
+Docs: [AutoQuery Dev Workflow](https://react-templates.net/docs/autoquery/dev-workflow)
 
 ## Admin Features
 
