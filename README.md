@@ -50,9 +50,9 @@ dotnet watch
 ### Frontend
 
 - **Vue 3** - A JavaScript library for building user interfaces
-- **Vite 7** - Next Generation Frontend Tooling
+- **Vite+** - Unified toolchain: Vite 8 (Rolldown), Vitest, Oxlint and Oxfmt via the `vp` CLI
 - **Tailwind CSS v4** - CSS-first configuration with `@tailwindcss/vite` plugin
-- **TypeScript 5** - JavaScript with syntax for types
+- **TypeScript 6** - JavaScript with syntax for types, `.vue` SFCs type checked by `vue-tsc`
 - **Vitest** - Modern testing framework
 - **ServiceStack Vue Components** - Pre-built UI components
 
@@ -117,12 +117,12 @@ MyApp/                         # .NET Backend (hosts both .NET and Vite Vue
 MyApp.Client/                  # Vue Frontend
 ├── src/
 │   ├── lib/
-│   │   ├── dtos.ts            # Auto-generated from C# (via `npm run dtos`)
+│   │   ├── dtos.ts            # TypeScript DTOs, auto-generated on .NET App startup
 │   │   ├── gateway.ts         # ServiceStack JsonServiceClient
 │   │   └── utils.ts           # Utility functions
 │   ├── components/            # Vue components
 │   └── styles/                # Tailwind CSS
-└── vite.config.ts             # Vite config for dev mode
+└── vite.config.ts             # Vite+ config (build, lint, fmt, test)
 
 MyApp.ServiceModel/            # DTOs & API contracts
 ├── *.cs                       # C# Request/Response DTOs
@@ -157,13 +157,13 @@ dotnet watch
 
 This automatically starts both .NET and Vite dev servers.
 
-### 2. Generate TypeScript DTOs
+### 2. TypeScript DTOs
 
-After modifying C# service models, regenerate TypeScript dtos.ts in `MyApp` or `MyApp.Client` with:
+TypeScript DTOs in `MyApp.Client/src/lib/dtos.ts` are generated automatically from your C# service models every time the .NET App starts.
+This is done by the `dtos` StartupTask in [Configure.StartupTasks.GenerateDtos.cs](MyApp/Configure.StartupTasks.GenerateDtos.cs).
+After modifying C# service models, restart the .NET App and the updated DTOs are ready to use.
 
-```bash
-npm run dtos
-```
+It's typically never needed, but DTOs can also be regenerated manually against a running .NET App with `npm run dtos` in `MyApp` or `MyApp.Client`.
 
 ### 3. Database Migrations
 
@@ -187,13 +187,23 @@ npm run test:ui     # Run tests with UI
 npm run test:run    # Run tests once
 ```
 
+**Format, lint & type check:**
+```bash
+cd MyApp.Client
+npm run check       # Format + lint + type check (Oxfmt, Oxlint, vue-tsc)
+npm run fmt         # Format files, inc. .vue SFCs
+```
+
+The [Vite+](https://viteplus.dev) `vp` CLI is installed locally, so the npm scripts work without a global install.
+Install the optional global CLI (`curl -fsSL https://vite.plus | bash`) to run `vp` commands directly.
+
 ## Configuration
 
 ### Key Configuration Files
 
 - **MyApp/appsettings.json** - Application configuration
-- **MyApp.Client/next.config.mjs** - Next.js configuration
-- **MyApp.Client/styles/index.css** - Tailwind CSS configuration
+- **MyApp.Client/vite.config.ts** - Vite+ configuration (build, lint, fmt, test)
+- **MyApp.Client/styles/style.css** - Tailwind CSS configuration
 - **config/deploy.yml** - Kamal deployment settings
 
 ### App Settings
