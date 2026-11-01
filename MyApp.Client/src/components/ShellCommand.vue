@@ -48,13 +48,13 @@ const props = defineProps<{
 }>()
 
 const copied = ref(false)
-const commandRef = ref(null)
+const commandRef = ref<HTMLElement | null>(null)
 
 async function copy(e: MouseEvent) {
   e.preventDefault()
 
   // Get the text content from the command element
-  const textToCopy = (commandRef.value as any).textContent?.trim() || ""
+  const textToCopy = commandRef.value?.textContent?.trim() || ""
 
   try {
     // Use modern Clipboard API

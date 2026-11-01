@@ -37,7 +37,7 @@ router.beforeEach((to, _from, next) => {
 ServiceStackVue.component('RouterLink', RouterLink)
 const { client, load } = useApp()
 
-load().then(() => {
+void load().then(() => {
     createApp(App)
         .use(ServiceStackVue)
         .provide('client', client)

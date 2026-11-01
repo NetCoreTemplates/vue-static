@@ -38,7 +38,7 @@ export const client = new JsonServiceClient()
 export function useApp() {
     async function load() {
         const { signIn } = useAuth()
-        initMetadata({ client })
+        void initMetadata({ client }) // loads in the background
         const auth = await checkAuth()
         if (auth) signIn(auth)
     }
@@ -49,7 +49,7 @@ export function useApp() {
 }
 
 export function getRedirect(router:Router) {
-    let { redirect } = router.currentRoute?.value.query
+    let { redirect } = router.currentRoute.value.query
     let ret = redirect && Array.isArray(redirect)
         ? redirect[0]
         : redirect
