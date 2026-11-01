@@ -2,11 +2,11 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 interface Slide {
-    title: string;
-    summary: string;
-    image: string;
-    url: string;
-    path: string;
+    title: string
+    summary: string
+    image: string
+    url: string
+    path: string
 }
 
 const slides: Slide[] = [
@@ -19,7 +19,7 @@ const slides: Slide[] = [
     },
     {
         title: 'Locode',
-        summary: 'Instant CRUD UI to manage all your App\'s back-end AutoQuery Tables',
+        summary: "Instant CRUD UI to manage all your App's back-end AutoQuery Tables",
         image: 'https://docs.servicestack.net/img/pages/admin-ui/carousel/locode.webp',
         url: 'https://docs.servicestack.net/locode/',
         path: '/locode',
@@ -103,18 +103,18 @@ const slides: Slide[] = [
     },
     {
         title: 'Database Browser',
-        summary: 'Browse RDBMS tables of all App\'s configured databases',
+        summary: "Browse RDBMS tables of all App's configured databases",
         image: 'https://docs.servicestack.net/img/pages/admin-ui/carousel/database.webp',
         url: 'https://docs.servicestack.net/admin-ui-database',
         path: '/admin-ui/database',
     },
     {
         title: 'Redis Admin',
-        summary: 'Inspect, browse and modify the App\'s configured Redis instance',
+        summary: "Inspect, browse and modify the App's configured Redis instance",
         image: 'https://docs.servicestack.net/img/pages/admin-ui/carousel/redis.webp',
         url: 'https://docs.servicestack.net/admin-ui-redis',
-        path:'/admin-ui/redis',
-    }
+        path: '/admin-ui/redis',
+    },
 ]
 
 defineProps<{
@@ -200,7 +200,7 @@ const getSlideClass = (index: number) => {
     if (index === currentIndex.value) {
         return 'opacity-100 translate-x-0'
     }
-    
+
     if (direction.value === 'right') {
         return index < currentIndex.value ? 'opacity-0 -translate-x-full' : 'opacity-0 translate-x-full'
     } else {
@@ -211,38 +211,32 @@ const getSlideClass = (index: number) => {
 
 <template>
     <div :class="`relative overflow-hidden bg-white dark:bg-slate-900 pt-24 pb-40 ${className ?? ''}`">
-    
         <!-- Background Decorative Elements (Glow effects) -->
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] opacity-30 pointer-events-none">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-100 via-purple-100 to-blue-100 dark:from-blue-900/40 dark:via-purple-900/40 dark:to-blue-900/40 blur-3xl rounded-full" />
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-blue-100 via-purple-100 to-blue-100 dark:from-blue-900/40 dark:via-purple-900/40 dark:to-blue-900/40 blur-3xl rounded-full"
+            />
         </div>
 
         <div class="relative z-10 container mx-auto px-4 text-center">
-
             <!-- Main Title with Gradient -->
             <h1 class="max-w-4xl mx-auto mb-6 text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                Built-in <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">UIs</span>
+                Built-in
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">UIs</span>
             </h1>
 
             <!-- Subtext -->
             <p class="max-w-3xl mx-auto mb-12 text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-                Manage your ServiceStack App, instantly explore, and query your APIs using 
-                the built-in Auto UIs that's automatically generated from your App's typed C# DTOs.
+                Manage your ServiceStack App, instantly explore, and query your APIs using the built-in Auto UIs that's automatically generated from your App's
+                typed C# DTOs.
             </p>
         </div>
-        
+
         <!-- Image Carousel -->
         <div class="w-full">
-            <div
-                class="relative"
-                @mouseenter="handleMouseEnter"
-                @mouseleave="handleMouseLeave"
-            >
+            <div class="relative" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
                 <!-- URL Link -->
-                <a
-                    :href="currentSlide.path"
-                    class="block mb-6 text-center group/link hover:opacity-80 transition-opacity"
-                >
+                <a :href="currentSlide.path" class="block mb-6 text-center group/link hover:opacity-80 transition-opacity">
                     <div class="text-3xl font-mono">
                         <span class="text-blue-600 hover:text-blue-700 font-semibold">{{ currentSlide.path }}</span>
                     </div>
@@ -257,12 +251,7 @@ const getSlideClass = (index: number) => {
                             :key="index"
                             :class="`absolute inset-0 transition-all duration-700 ease-in-out ${getSlideClass(index)}`"
                         >
-                            <img
-                                :src="slide.image"
-                                :alt="slide.title"
-                                class="w-full h-full object-cover"
-                                :loading="index === 0 ? 'eager' : 'lazy'"
-                            />
+                            <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover" :loading="index === 0 ? 'eager' : 'lazy'" />
                         </div>
 
                         <!-- Navigation Arrows - Only show on hover -->
@@ -294,20 +283,14 @@ const getSlideClass = (index: number) => {
                                 <div class="flex-1 min-w-0">
                                     <!-- Title with animation -->
                                     <div class="overflow-hidden mb-4">
-                                        <h2
-                                            :key="currentIndex"
-                                            class="text-3xl font-bold text-white animate-[slideUp_0.5s_ease-out]"
-                                        >
+                                        <h2 :key="currentIndex" class="text-3xl font-bold text-white animate-[slideUp_0.5s_ease-out]">
                                             {{ currentSlide.title }}
                                         </h2>
                                     </div>
 
                                     <!-- Summary with animation -->
                                     <div class="overflow-hidden">
-                                        <p
-                                            :key="`summary-${currentIndex}`"
-                                            class="text-lg text-gray-200 animate-[slideUp_0.5s_ease-out_0.1s_both]"
-                                        >
+                                        <p :key="`summary-${currentIndex}`" class="text-lg text-gray-200 animate-[slideUp_0.5s_ease-out_0.1s_both]">
                                             {{ currentSlide.summary }}
                                         </p>
                                     </div>
@@ -352,9 +335,7 @@ const getSlideClass = (index: number) => {
                             type="button"
                             @click="goToSlide(index)"
                             :class="`transition-all duration-300 rounded-full focus:outline-none ${
-                                index === currentIndex
-                                    ? 'w-12 h-3 bg-blue-600 shadow-lg'
-                                    : 'w-3 h-3 bg-slate-300 hover:bg-slate-400'
+                                index === currentIndex ? 'w-12 h-3 bg-blue-600 shadow-lg' : 'w-3 h-3 bg-slate-300 hover:bg-slate-400'
                             }`"
                             :aria-label="`Go to slide ${index + 1}`"
                             :aria-current="index === currentIndex ? 'true' : 'false'"
